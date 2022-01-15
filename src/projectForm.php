@@ -64,7 +64,7 @@
     </nav>
     <div class="row d-flex justify-content-center mx-5 py-0 my-5 shadow" style="border-radius: 20px;">
         <div class="col-md-6 col-sm-6 col-lg-6 px-3 py-3 bg-light" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
-            <img class="shadow" src="../assets/img/abstract_unsplash.jpg" style="height: 65vh; max-width: 100%; width:100%; border-radius:20px;">
+            <img class="shadow" src="../assets/img/jpmorgam.jpg" style="height: 65vh; max-width: 100%; width:100%; border-radius:20px;">
         </div>
         <div class="container col-md-6 col-sm-6 col-lg-6 px-3 py-3 bg-light row"style="border-top-right-radius:20px; border-bottom-right-radius: 20px;">
             <div class= "col-md-12 col-sm-12 col-lg-12 text-center text-dark my-1 pt-4 pb-0">

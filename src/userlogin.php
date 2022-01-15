@@ -1,4 +1,31 @@
-<!--  -->
+<?php
+
+include '../config/config.php';
+
+session_start();
+
+error_reporting(0);
+
+if (isset($_SESSION['name'])) {
+    header("Location: index.php");
+}
+
+if (isset($_POST['submit'])) {
+	$email = $_POST['email'];
+	$password = md5($_POST['pwd']);
+
+	$sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+	$result = mysqli_query($conn, $sql);
+	if ($result->num_rows > 0) {
+		$row = mysqli_fetch_assoc($result);
+		$_SESSION['name'] = $row['name'];
+		header("Location: index.php");
+	} else {
+		echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+	}
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,16 +54,16 @@
 <body class="gradientbackground">
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><strong>COLLEG</strong><span
+            <a class="navbar-brand" href="index.php"><strong>COLLEG</strong><span
                     class="text-danger"><strong>EXP</strong></span></a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
                 <span class=" fas fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <div class="navbar-nav">
-                    <a href="#" class="nav-item nav-link active">Home</a>
-                    <a href="projects.html" class="nav-item nav-link">Projects</a>
-                    <a href="#" class="nav-item nav-link">Dashboard</a>
+                    <a href="index.php" class="nav-item nav-link active">Home</a>
+                    <a href="projects.php" class="nav-item nav-link">Projects</a>
+                    <a href="userdashboard.php" class="nav-item nav-link">Dashboard</a>
                 </div>
             </div>
         </div>
@@ -60,36 +87,17 @@
     <div class="container-fluid my-5 py-0 px-5 d-flex justify-content-center" style="min-height:60vh;">
         <div class="row container-fluid py-3 px-5 my-0 d-flex justify-content-center bg-light shadow" style="max-width: 600px; border-radius: 20px;">
             <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
-                <h3 class="display-5 font-weight-bold">Sign Up</h3>
+                <h3 class="display-5 font-weight-bold">Login</h3>
             </div>
-            <form class="col-sm-9 col-md-9 col-lg-9 px-3 py-3">
-                <div class="col-sm-12 col-md-12 col-lg-12 my-3">
-                    <input type="text" name="firstName" placeholder="Name" class="form-control">
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-12 my-3">
+            <form class="col-sm-9 col-md-9 col-lg-9 px-3 py-0" action="" method="POST">
+                <div class="col-sm-12 col-md-12 col-lg-12 my-5">
                     <input type="email" name="email" placeholder="Email" class="form-control">
                 </div>
-                <div class="col-sm-12 col-md-12 col-lg-12 my-3">
-                    <label for="student_year" class="form-label">Year in College:</label>
-                    <input list="student_year_list" id="student_year" name="student_year" class="form-control" />
-            
-                    <datalist id="student_year_list">
-                        <option value="First Year">
-                        <option value="Second Year">
-                        <option value="Third Year">
-                        <option value="Fourth Year">
-                        <option value="Fifth Year">
-                        <option value="Passed College!">
-                    </datalist>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-12 my-3">
-                    <input type="password" name="pwd" placeholder="New Password" class="form-control">
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-12 my-3">
-                    <input type="password" name="cnfpwd" placeholder="Confirm Password" class="form-control">
+                <div class="col-sm-12 col-md-12 col-lg-12 mt-5 mb-0">
+                    <input type="password" name="pwd" placeholder="Password" class="form-control">
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-12 d-flex my-3 py-0 justify-content-center">
-                    <p class="text-muted text-center my-0 smalltext"><i>Already have an account? <a href="userlogin.html" style="text-decoration: none;">Click Here</a></i></p>
+                    <p class="text-muted text-center my-0 smalltext"><i>Don't have an account? <a href="userreg.php" style="text-decoration: none;">Click Here</a></i></p>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-12 my-2 d-flex justify-content-center">
                     <button type="submit" class="btn btn-lg btn-outline-info">Submit</button>

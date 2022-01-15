@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['name'])) {
+    header('Location: userlogin.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,40 +31,44 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html"><strong>COLLEG</strong><span
+            <a class="navbar-brand" href="index.php"><strong>COLLEG</strong><span
                     class="text-danger"><strong>EXP</strong></span></a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
                 <span class=" fas fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <div class="navbar-nav">
-                    <a href="#" class="nav-item nav-link active">Home</a>
-                    <a href="projects.html" class="nav-item nav-link">Projects</a>
-                    <a href="#" class="nav-item nav-link">Dashboard</a>
+                    <a href="index.php" class="nav-item nav-link">Home</a>
+                    <a href="#" class="nav-item nav-link active">Projects</a>
+                    <a href="userdashboard.php" class="nav-item nav-link">Dashboard</a>
                 </div>
             </div>
-            <div class="navbar-nav ms-auto">
-                Login
-            </div>
+            <?php
+            if (isset($_SESSION['name'])) {
+                echo '<div class="navbar-nav ms-auto"> Hi' . $_SESSION['name'] . '</div>';
+            }
+            ?>
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><strong>COLLEG</strong><span
+            <a class="navbar-brand" href="index.php"><strong>COLLEG</strong><span
                     class="text-danger"><strong>EXP</strong></span></a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
                 <span class=" fas fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <div class="navbar-nav">
-                    <a href="#" class="nav-item nav-link">Home</a>
-                    <a href="#" class="nav-item nav-link">Projects</a>
-                    <a href="#" class="nav-item nav-link active">Profile</a>
+                    <a href="index.php" class="nav-item nav-link">Home</a>
+                    <a href="#" class="nav-item nav-link active">Projects</a>
+                    <a href="userdashboard.php" class="nav-item nav-link">Dashboard</a>
                 </div>
             </div>
-            <div class="navbar-nav ms-auto">
-                Login
-            </div>
+            <?php
+            if (isset($_SESSION['name'])) {
+                echo '<div class="navbar-nav ms-auto"> Hi' . $_SESSION['name'] . '</div>';
+            }
+            ?>
         </div>
     </nav>
     <div class="container-fluid gradientbackground my-0">
