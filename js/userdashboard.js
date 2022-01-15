@@ -43,7 +43,7 @@ window.onload = function () {
 };
 
 progressAnimation = function (xp, progress, max) {
-  var percentage = (xp / max) * 100;
+  var percentage = Math.round((xp / max) * 100);
   let current_width = 0;
   let anim = setInterval(frame, 5);
   function frame() {
