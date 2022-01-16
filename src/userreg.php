@@ -1,8 +1,11 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
 <?php
 
 include '../config/config.php';
 
-error_reporting(0);
 
 session_start();
 
@@ -18,34 +21,31 @@ if (isset($_POST['submit'])) {
 	$cpassword = md5($_POST['cnfpwd']);
 
 	if ($password == $cpassword) {
-		$sql = "SELECT * FROM user_base WHERE email='$email'";
+		$sql = "SELECT * FROM user_base WHERE email='$email';";
 		$result = mysqli_query($conn, $sql);
 		if (!$result->num_rows > 0) {
-			$sql = "INSERT INTO `users` (`name`,`student_year`, `email_id`, `password`)
+			$sql = "INSERT INTO `user_base` (`name`,`student_year`, `email_id`, `password`)
 					VALUES ('$name','$student_year', '$email', '$password')";
 			$result = mysqli_query($conn, $sql);
 			if ($result) {
 				echo "<script>alert('Wow! User Registration Completed.')</script>";
-				$username = "";
 				$email = "";
 				$_POST['password'] = "";
 				$_POST['cpassword'] = "";
+                $_SESSION['name'] = (explode(" ",$name));
+                header("Location: index.php");
 			} else {
-				echo "<script>alert('Woops! Something Went Wrong.')</script>";
+				echo "<script>alert('Woops! Something Went Wrong.');</script>";
 			}
 		} else {
-			echo "<script>alert('Woops! Email Already Exists.')</script>";
+			echo "<script>alert('Woops! Email Already Exists.');</script>";
 		}
 	} else {
-		echo "<script>alert('Password Not Matched.')</script>";
+		echo "<script>alert('Password Not Matched.');</script>";
 	}
 }
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,7 +86,7 @@ if (isset($_POST['submit'])) {
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><strong>COLLEG</strong><span
+            <a class="navbar-brand" href="index.php"><strong>COLLEG</strong><span
                     class="text-danger"><strong>EXP</strong></span></a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
                 <span class=" fas fa-bars"></span>
@@ -135,7 +135,7 @@ if (isset($_POST['submit'])) {
                     <p class="text-muted text-center my-0 smalltext"><i>Already have an account? <a href="userlogin.html" style="text-decoration: none;">Click Here</a></i></p>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-12 my-2 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-lg btn-outline-info">Submit</button>
+                    <button type="submit" name="submit" class="btn btn-lg btn-outline-info">Submit</button>
                 </div>
             </form>
             

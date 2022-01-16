@@ -32,7 +32,8 @@
       if (!isset($_SESSION['name'])) {
         echo '<div class="navbar-nav ms-auto"><a href="userlogin.php" style="text-decoration: none;">Login</a></div>';
       } else {
-        echo '<div class="navbar-nav ms-auto"> Hi'.$_SESSION['name'].'</div>';
+        echo '<div class="navbar-nav ms-auto px-3"> Hi '.$_SESSION['name'][0].'</div>';
+        echo '<div class="navbar-nav ms-auto"><a href="logout.php" style="text-decoration: none;">Logout</a></div>';
       }
       ?>
     </div>
@@ -50,13 +51,6 @@
           <a href="userdashboard.php" class="nav-item nav-link active">Dashboard</a>
         </div>
       </div>
-      <?php
-      if (!isset($_SESSION['username'])) {
-        echo '<div class="navbar-nav ms-auto">Login</div>';
-      } else {
-        echo '<div class="navbar-nav ms-auto"> Hi'.$_SESSION['name'].'</div>';
-      }
-      ?>
     </div>
   </nav>
   <div class="container-fluid px-5 py-5" style="background-image: url('../assets/img/college_unsplash.jpg'); background-repeat: no-repeat;">

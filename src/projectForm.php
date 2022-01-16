@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
+if (!isset($_SESSION['name'])) {
+    header('Location: userlogin.php');
+}
 
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,14 +39,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <div class="navbar-nav">
-                    <a href="#" class="nav-item nav-link active">Home</a>
+                    <a href="index.php" class="nav-item nav-link">Home</a>
                     <a href="projects.html" class="nav-item nav-link">Projects</a>
-                    <a href="#" class="nav-item nav-link">Dashboard</a>
+                    <a href="userdashboard.php" class="nav-item nav-link">Dashboard</a>
                 </div>
             </div>
-            <div class="navbar-nav ms-auto">
-                Login
-            </div>
+            <?php
+            if (isset($_SESSION['name'])) {
+                echo '<div class="navbar-nav ms-auto px-3"> Hi '.$_SESSION['name'][0].'</div>';
+                echo '<div class="navbar-nav ms-auto"><a href="logout.php" style="text-decoration: none;">Logout</a></div>';
+            }
+            ?>
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">

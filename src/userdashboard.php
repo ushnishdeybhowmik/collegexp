@@ -38,14 +38,15 @@ if (!isset($_SESSION['name'])) {
             </div>
             <?php
             if (isset($_SESSION['name'])) {
-                echo '<div class="navbar-nav ms-auto"> Hi' . $_SESSION['name'] . '</div>';
+                echo '<div class="navbar-nav ms-auto px-3"> Hi '.$_SESSION['name'][0].'</div>';
+                echo '<div class="navbar-nav ms-auto"><a href="logout.php" style="text-decoration: none;">Logout</a></div>';
             }
             ?>
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><strong>COLLEG</strong><span class="text-danger"><strong>EXP</strong></span></a>
+            <a class="navbar-brand" href="index.php"><strong>COLLEG</strong><span class="text-danger"><strong>EXP</strong></span></a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
                 <span class=" fas fa-bars"></span>
             </button>
@@ -56,17 +57,11 @@ if (!isset($_SESSION['name'])) {
                     <a href="#" class="nav-item nav-link active">Dashboard</a>
                 </div>
             </div>
-            <?php
-            if (!isset($_SESSION['name'])) {
-                echo '<div class="navbar-nav ms-auto"> Hi' . $_SESSION['name'] . '</div>';
-            }
-            ?>
         </div>
     </nav>
     <div class="jumbotron round-0 text-center px-5 py-5 text-white bg-dark" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../assets/img/aesthetic_unsplash.jpg');">
         <h2 class="my-4">Hi <?php if (isset($_SESSION['name'])) {
-                                $name = (explode("", $_SESSION['name']));
-                                echo $name;
+                                echo $_SESSION['name'][0];
                             } ?>!</h2>
         <h4 class="my-4 font-weight-light">Lets Get You Started</h4>
         <div class="d-flex py-3 justify-content-around text-white my-3">

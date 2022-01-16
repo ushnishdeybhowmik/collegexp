@@ -4,7 +4,6 @@ include '../config/config.php';
 
 session_start();
 
-error_reporting(0);
 
 if (isset($_SESSION['name'])) {
     header("Location: index.php");
@@ -14,15 +13,20 @@ if (isset($_POST['submit'])) {
 	$email = $_POST['email'];
 	$password = md5($_POST['pwd']);
 
-	$sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+	$sql = "SELECT * FROM user_base WHERE email_id='$email' AND password='$password'";
 	$result = mysqli_query($conn, $sql);
-	if ($result->num_rows > 0) {
-		$row = mysqli_fetch_assoc($result);
-		$_SESSION['name'] = $row['name'];
-		header("Location: index.php");
-	} else {
-		echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
-	}
+    if($result){
+        if ($result->num_rows > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION['name'] = (explode(" ",$row['name']));
+            header("Location: index.php");
+        } else {
+            echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+        }
+    } else {
+        echo "Error in ".$sql."<br>".$conn->error;
+    }
+	
 }
 
 ?>
@@ -70,16 +74,16 @@ if (isset($_POST['submit'])) {
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><strong>COLLEG</strong><span
+            <a class="navbar-brand" href="index.php"><strong>COLLEG</strong><span
                     class="text-danger"><strong>EXP</strong></span></a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
                 <span class=" fas fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <div class="navbar-nav">
-                    <a href="#" class="nav-item nav-link">Home</a>
-                    <a href="#" class="nav-item nav-link">Projects</a>
-                    <a href="#" class="nav-item nav-link active">Profile</a>
+                    <a href="index.php" class="nav-item nav-link">Home</a>
+                    <a href="projects.php" class="nav-item nav-link">Projects</a>
+                    <a href="userdashboard.php" class="nav-item nav-link active">Dashboard</a>
                 </div>
             </div>
         </div>
@@ -100,7 +104,7 @@ if (isset($_POST['submit'])) {
                     <p class="text-muted text-center my-0 smalltext"><i>Don't have an account? <a href="userreg.php" style="text-decoration: none;">Click Here</a></i></p>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-12 my-2 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-lg btn-outline-info">Submit</button>
+                    <button type="submit" name="submit" class="btn btn-lg btn-outline-info">Submit</button>
                 </div>
             </form>
             

@@ -45,7 +45,8 @@ if (!isset($_SESSION['name'])) {
             </div>
             <?php
             if (isset($_SESSION['name'])) {
-                echo '<div class="navbar-nav ms-auto"> Hi' . $_SESSION['name'] . '</div>';
+                echo '<div class="navbar-nav ms-auto px-3"> Hi '.$_SESSION['name'][0].'</div>';
+                echo '<div class="navbar-nav ms-auto"><a href="logout.php" style="text-decoration: none;">Logout</a></div>';
             }
             ?>
         </div>
@@ -64,11 +65,7 @@ if (!isset($_SESSION['name'])) {
                     <a href="userdashboard.php" class="nav-item nav-link">Dashboard</a>
                 </div>
             </div>
-            <?php
-            if (isset($_SESSION['name'])) {
-                echo '<div class="navbar-nav ms-auto"> Hi' . $_SESSION['name'] . '</div>';
-            }
-            ?>
+            
         </div>
     </nav>
     <div class="container-fluid gradientbackground my-0">
